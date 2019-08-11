@@ -19,8 +19,9 @@ class HomeScreenCard extends StatelessWidget {
               child: Image.asset(
             asset,
             fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
+            height: 320,
+            width:double.infinity
+            
           )),
           tag: asset,
         ),
