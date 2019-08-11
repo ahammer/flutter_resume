@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/experience/experience.dart';
 
 import 'details_screen.dart';
 import 'home_screen_panel.dart';
@@ -80,11 +81,6 @@ class AboutMeScreen extends StatelessWidget {
       body: DetailsScreen(title: "About", asset: "assets/bg1.jpg"));
 }
 
-class ResumeScreen extends StatelessWidget {
-  @override
-  build(BuildContext context) => ResumeScaffold(
-      body: DetailsScreen(title: "Experience", asset: "assets/bg2.jpg"));
-}
 
 class SkillScreen extends StatelessWidget {
   @override

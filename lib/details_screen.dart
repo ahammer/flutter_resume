@@ -27,8 +27,14 @@ class DetailsScreen extends StatelessWidget {
                 color: Color.fromARGB(128, 0, 0, 0),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(title,
-                      style: Theme.of(context).textTheme.display1),
+                  child: Row(
+                    children: <Widget>[
+                      IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                      Text(title,style: Theme.of(context).textTheme.display1),
+                    ],
+                  ),
                 )),
           ),
           Expanded(
