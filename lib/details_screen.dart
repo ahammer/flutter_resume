@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class DetailsScreen extends StatelessWidget {
   final String title;
   final String asset;
-  const DetailsScreen({Key key, this.title, this.asset}) : super(key: key);
+  final Widget body;
+
+  const DetailsScreen({Key key, this.title, this.asset, this.body}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class DetailsScreen extends StatelessWidget {
                   width: double.infinity,
                   child: Hero(
                       tag: "${title}_details",
-                      child: Card(color: Color.fromARGB(128,0,0,0), child: Text("Details")))))
+                      child: Card(color: Color.fromARGB(128,0,0,0), child: body))))
         ],
       )
     ]);
