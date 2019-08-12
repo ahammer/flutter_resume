@@ -15,13 +15,12 @@ class ResumeEntry {
   ResumeEntry(this.company, this.startDate, this.endDate, this.jobTitle,
       this.achievements);
 
-  String lengthString() { 
-    final timeMs = endDate.millisecondsSinceEpoch - startDate.millisecondsSinceEpoch;
+  String lengthString() {
+    final timeMs =
+        endDate.millisecondsSinceEpoch - startDate.millisecondsSinceEpoch;
     final timeMonths = ((timeMs / 2629746000) % 12).toInt();
     final timeYears = ((timeMs / 2629746000) / 12).toInt();
-    
 
-    
     if (timeYears == 0) {
       return "$timeMonths Months";
     } else if (timeMonths == 0) {

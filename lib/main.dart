@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:resume_flutter/experience/experience.dart';
+import 'package:resume_flutter/about.dart';
+import 'package:resume_flutter/experience.dart';
 
-import 'details_screen.dart';
-import 'home_screen_panel.dart';
+import 'package:resume_flutter/details_screen.dart';
+import 'package:resume_flutter/home_screen_panel.dart';
 
 void main() {
   _setTargetPlatformForDesktop();
@@ -72,11 +73,6 @@ class RootScreen extends StatelessWidget {
 
 
 
-class AboutMeScreen extends StatelessWidget {
-  @override
-  build(BuildContext context) => ResumeScaffold(
-      body: DetailsScreen(title: "About", asset: "assets/bg1.jpg"));
-}
 
 
 class SkillScreen extends StatelessWidget {
