@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage>
                       height: (selected == index) ? 200 : 100 + phase2,
                       decoration: (selected == index)?selectedHomeButtonDecoration:homeButtonDecoration,
                       duration: Duration(milliseconds: 300),
-                      child: Center(child: Text(title, textScaleFactor: 1.3,)),
+                      child: Center(child: AnimatedOpacity(duration : Duration(milliseconds: 300), opacity: (selected != -1 && selected != index)?0:1,child: Text(title, textScaleFactor: 1.3,))),
                     ),
                   );
   }
