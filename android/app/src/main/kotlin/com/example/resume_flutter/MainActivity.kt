@@ -1,4 +1,4 @@
-package com.example.flutter_resume
+package com.example.resume_flutter
 
 import android.os.Bundle
 import io.flutter.app.FlutterActivity
