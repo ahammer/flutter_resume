@@ -102,31 +102,35 @@ class _MyHomePageState extends State<MyHomePage>
             child: Center(
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 25, child: Container()),
+                  Expanded(flex: 18, child: Container()),
                   Text("Adam Hammer",
                       style: Theme.of(context).textTheme.display3),
                   Text("Developer",
                       style: Theme.of(context).textTheme.display1),
-                   
-                  Container(
-                    height: 150,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(flex: 40, child: Container()),
-                        buildButton(
-                            index: 0, phase1: o1, phase2: o4, title: "About"),
-                        Expanded(flex: 1, child: Container()),
-                        buildButton(
-                            index: 1, phase1: o2, phase2: o3, title: "Github"),
-                        Expanded(flex: 1, child: Container()),
-                        buildButton(
-                            index: 2, phase1: o3, phase2: o2, title: "Resume"),
-                        Expanded(flex: 1, child: Container()),
-                        buildButton(
-                            index: 3, phase1: o4, phase2: o1, title: "Contact"),
-                        Expanded(flex: 40, child: Container()),
-                      ],
-                    ),
+                   Container(height: 50),
+                  Row(
+                    children: <Widget>[
+                      Expanded(flex: 40, child: Container()),
+                      buildButton(
+                          index: 2, phase1: o3, phase2: o2, title: "About"),
+                      Expanded(flex: 6, child: Container()),
+                      buildButton(
+                          index: 3, phase1: o4, phase2: o1, title: "Github"),
+                      Expanded(flex: 40, child: Container()),
+                    ],
+                  ),
+
+                  Container(height: 96),
+                  Row(
+                    children: <Widget>[
+                      Expanded(flex: 40, child: Container()),
+                      buildButton(
+                          index: 2, phase1: o3, phase2: o2, title: "Resume"),
+                      Expanded(flex: 6, child: Container()),
+                      buildButton(
+                          index: 3, phase1: o4, phase2: o1, title: "Contact"),
+                      Expanded(flex: 40, child: Container()),
+                    ],
                   ),
                   Expanded(flex: 20, child: Container()),
                 ],
@@ -172,8 +176,8 @@ class BackgroundPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final width = 600.0;
-    final height = 300.0;
+    final width = 450.0;
+    final height = 450.0;
     particleDelegatePainter.paint(canvas, size);
 
     drawCellophaneLayer(
