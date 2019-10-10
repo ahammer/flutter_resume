@@ -147,21 +147,17 @@ class _MyHomePageState extends State<MyHomePage>
     if (phase1 == null || phase2 == null || selected == null) {
       return Container();
     }
-    return Listener(
-      onPointerExit: (_) => selected = -1,
-      onPointerEnter: (_) => selected = index,
-      child: AnimatedContainer(
-        width: (enabled) ? 200 : (selected == -1) ? 100 + phase1??0 * 10 : 100 ?? 0,
-        height: (enabled) ? 100 : 50 ?? 0,
-        decoration:
-            (enabled) ? selectedHomeButtonDecoration : homeButtonDecoration,
-        duration: Duration(milliseconds: 300),
-        child: Center(
-            child: Text(
-          title,
-          textScaleFactor: 1.3,
-        )),
-      ),
+    return AnimatedContainer(
+      width: (enabled) ? 200 : (selected == -1) ? 100 + phase1??0 * 10 : 100 ?? 0,
+      height: (enabled) ? 100 : 50 ?? 0,
+      decoration:
+          (enabled) ? selectedHomeButtonDecoration : homeButtonDecoration,
+      duration: Duration(milliseconds: 300),
+      child: Center(
+          child: Text(
+        title,
+        textScaleFactor: 1.3,
+      )),
     );
   }
 }
@@ -267,3 +263,4 @@ BoxDecoration selectedHomeButtonDecoration = BoxDecoration(
     ),
     boxShadow: [BoxShadow(blurRadius: 4, offset: Offset(2,2), color:  Colors.black)],
     borderRadius: BorderRadius.circular(8));
+

@@ -2,53 +2,40 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-const maxSize = 100.0;
+final random = Random();
+const maxSize = 2000.0;
 
 class Particle {
   double x, y, xs, ys;
 
-  final r1 = Random().nextDouble();
-  final r2 = Random().nextDouble();
-  final r3 = Random().nextDouble();
-  final r4 = Random().nextDouble();
+  final r1 = random.nextDouble();
+  final r2 = random.nextDouble();
+  final r3 = random.nextDouble();
+  final r4 = random.nextDouble();
 
   double size;
   double maxAge;
   double age;
-  final color = Color.fromARGB(255, 0, Random().nextInt(255), Random().nextInt(255));
+  final color = Colors.greenAccent;
+      
 
   Particle() {
-    randomize(10000, 10000);
+    randomize(5000, 5000, firstBuild: true);
   }
 
-  void randomize(double width, double height) {
-    x = Random().nextDouble() * width;
-    y = Random().nextDouble() * height;
-    xs = (Random().nextDouble() - 0.5);
-    ys = (Random().nextDouble() - 0.5);
-    if (Random().nextBool()) {
-      xs = 0;
-    } else {
-      ys = 0;
-    }
-    size = Random().nextDouble() * maxSize + 100;
-    age = 0;
-    maxAge = Random().nextDouble() * 15000 + 2;
+  void randomize(double width, double height, {bool firstBuild = false}) {
+    x = random.nextDouble() * width;
+    y = random.nextDouble() * height;
+    xs = (random.nextDouble() - 0.5) * 0.2;
+    ys = (random.nextDouble() - 0.5) * 0.2;
+    
 
-    if (Random().nextBool()) {
-      if (xs > 0) {
-        x = -maxSize / 2;
-      } else {
-        x = width + maxSize / 2;
-      }
-    } else {
-      if (ys > 0) {
-        y = -maxSize / 2;
-      } else {
-        y = height + maxSize / 2;
-      }
-    }
+    size = random.nextDouble() * maxSize;
+    age = 0;
+    maxAge = random.nextDouble() * 5 + 10;
+
+    
+
   }
 
   void step(double frameTime, Size size) {
@@ -77,9 +64,10 @@ class Particle {
 class Particles {
   List<Particle> particles = List();
 
-  Particles({count = 1000}) {
+  Particles({count = 50}) {
     for (int i = 0; i < count; i++) {
       particles.add(Particle());
+      particles[i].age = random.nextDouble()*particles[i].maxAge;
     }
   }
 }
@@ -96,24 +84,18 @@ class ParticlePainter extends CustomPainter {
       p.step(frameTime, size);
       double ageRemaining = 1 - (p.age / p.maxAge);
       if (ageRemaining > 0) {
-        final size = p.size * (ageRemaining) + 0.1;
-        canvas.drawCircle(
-            Offset(p.x, p.y),
-            size,
+        final size = p.size;
+        double opacity = (ageRemaining>0.8)?
+          1- ((ageRemaining - 0.8) * 5):
+          ageRemaining * 1.25;
+        opacity = opacity.clamp(0,0.5);
+        canvas.drawRect(Rect.fromCircle(center:Offset(p.x, p.y),radius: size),
+            
             Paint()
               ..blendMode = BlendMode.lighten
               ..isAntiAlias = false
-              ..shader = RadialGradient(
-                colors: <Color>[
-                  p.color.withOpacity(.2),
-                  p.color.withOpacity(0),
-                ],
-                stops: [
-                  0.0,
-                  1.0,
-                ],
-              ).createShader(Rect.fromCenter(
-                  center: Offset(p.x, p.y), width: size, height: size)));
+              ..color = p.color.withOpacity(opacity)
+              ..style = PaintingStyle.stroke);
       }
     });
   }
@@ -123,3 +105,17 @@ class ParticlePainter extends CustomPainter {
     return true;
   }
 }
+
+/** Shader for paint
+   ..shader = RadialGradient(
+                colors: <Color>[
+                  p.color.withOpacity(.8),
+                  p.color.withOpacity(0),
+                ],
+                stops: [
+                  0.0,
+                  1.0,
+                ],
+              ).createShader(Rect.fromCenter(
+                  center: Offset(p.x, p.y), width: size, height: size))
+ */
