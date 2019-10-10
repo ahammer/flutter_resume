@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:resume_flutter/particles.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,17 +44,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   Ticker ticker;
-  double time;
-  double width = 100;
+  double time = (DateTime.now().millisecondsSinceEpoch) / 1000.0;
+  double frameTime;
+  
   //Outputs to be used by the graphics engine
   double o1, o2, o3, o4, o5, o6, o7, o8;
+  final particleSim = Particles();
   int selected = -1;
 
   @override
   void initState() {
     ticker = createTicker((duration) {
       setState(() {
+        final oldTime = time;
         time = (DateTime.now().millisecondsSinceEpoch) / 1000.0;
+        frameTime = time - oldTime;
+        if (frameTime > 1) frameTime = 0;
+        
         o1 = cos(time);
         o2 = sin(time * 1.1);
         o3 = cos(-time * 1.2);
@@ -81,9 +88,11 @@ class _MyHomePageState extends State<MyHomePage>
     return Scaffold(
       body: Stack(
         children: <Widget>[
+
           Container(
             width: double.infinity,
             height: double.infinity,
+            color: Colors.black,
             child: CustomPaint(
               painter: BackgroundPainter(this),
             ),
@@ -98,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage>
                       style: Theme.of(context).textTheme.display3),
                   Text("Developer",
                       style: Theme.of(context).textTheme.display1),
-                  Expanded(flex: 1, child: Container()),
+                   
                   Container(
                     height: 150,
                     child: Row(
@@ -129,18 +138,21 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 
-  Listener buildButton(
+  Widget buildButton(
       {@required int index,
       @required double phase1,
       @required double phase2,
       @required String title}) {
     var enabled = selected == index;
+    if (phase1 == null || phase2 == null || selected == null) {
+      return Container();
+    }
     return Listener(
       onPointerExit: (_) => selected = -1,
       onPointerEnter: (_) => selected = index,
       child: AnimatedContainer(
-        width: (enabled) ? 200 : (selected == -1) ? width + phase1 * 10 : 100,
-        height: (enabled) ? 100 : 50,
+        width: (enabled) ? 200 : (selected == -1) ? 100 + phase1??0 * 10 : 100 ?? 0,
+        height: (enabled) ? 100 : 50 ?? 0,
         decoration:
             (enabled) ? selectedHomeButtonDecoration : homeButtonDecoration,
         duration: Duration(milliseconds: 300),
@@ -156,15 +168,19 @@ class _MyHomePageState extends State<MyHomePage>
 
 class BackgroundPainter extends CustomPainter {
   final _MyHomePageState state;
+  ParticlePainter particleDelegatePainter;
 
-  BackgroundPainter(this.state);
+  BackgroundPainter(this.state) {
+    particleDelegatePainter = ParticlePainter(state.particleSim, state.frameTime);
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
     final width = 600.0;
     final height = 300.0;
+    particleDelegatePainter.paint(canvas, size);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas,
         size,
         width,
@@ -174,7 +190,7 @@ class BackgroundPainter extends CustomPainter {
         state.o2,
         state.o5);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas,
         size,
         width,
@@ -184,7 +200,7 @@ class BackgroundPainter extends CustomPainter {
         state.o8,
         state.o5);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas,
         size,
         width,
@@ -194,7 +210,7 @@ class BackgroundPainter extends CustomPainter {
         state.o6,
         state.o8);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas,
         size,
         width,
@@ -204,7 +220,7 @@ class BackgroundPainter extends CustomPainter {
         state.o1,
         state.o4);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas,
         size,
         width,
@@ -214,11 +230,11 @@ class BackgroundPainter extends CustomPainter {
         state.o7,
         state.o4);
 
-    drawCircle(
+    drawCellophaneLayer(
         canvas, size, width, height, Colors.white.withAlpha(40), 0, 0, 0);
   }
 
-  void drawCircle(Canvas canvas, Size size, double width, double height,
+  void drawCellophaneLayer(Canvas canvas, Size size, double width, double height,
       Color color, double phase1, double phase2, double phase3) {
     canvas.drawRect(
         Rect.fromCenter(
