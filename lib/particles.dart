@@ -32,10 +32,7 @@ class Particle {
 
     size = random.nextDouble() * maxSize;
     age = 0;
-    maxAge = random.nextDouble() * 5+5;
-
-    
-
+    maxAge = random.nextDouble() * 5+5;  
   }
 
   void step(double frameTime, Size size) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/widgets/about_screen.dart';
 
 const kCardWidth = 320.0;
 const kCardHeight = 320.0;
@@ -29,9 +30,15 @@ class BusinessCard extends StatelessWidget {
               ),
               Expanded(flex: 1, child: Row(
                 children: <Widget>[
-                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("About"))), onPressed: () {})),
+                  Expanded(child: Hero(tag: "about",
+                                      child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("About"))), onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder:(ctx) => AboutScreen()));
+                    }),
+                  )),
                   Container(width: 16),
-                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Resume"))), onPressed: () {})),
+                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Resume"))), onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder:(ctx) => AboutScreen()));
+                  })),
                 ],
               )),
               Container(
@@ -39,9 +46,13 @@ class BusinessCard extends StatelessWidget {
               ),
               Expanded(flex: 1, child: Row(
                 children: <Widget>[
-                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Github"))), onPressed: () {})),
+                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Github"))), onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder:(ctx) => AboutScreen()));
+                  })),
                   Container(width: 16),
-                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Contact"))), onPressed: () {})),
+                  Expanded(child: RaisedButton(child: Container(height:double.infinity, child: Center(child: Text("Contact"))), onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder:(ctx) => AboutScreen()));
+                  })),
                 ],
               )),
               Container(
