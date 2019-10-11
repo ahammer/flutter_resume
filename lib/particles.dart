@@ -26,13 +26,13 @@ class Particle {
   void randomize(double width, double height, {bool firstBuild = false}) {
     x = random.nextDouble() * width;
     y = random.nextDouble() * height;
-    xs = (random.nextDouble() - 0.5) * 0.2;
-    ys = (random.nextDouble() - 0.5) * 0.2;
+    xs = (random.nextDouble() - 0.5) * 0.05;
+    ys = (random.nextDouble() - 0.5) * 0.05;
     
 
     size = random.nextDouble() * maxSize;
     age = 0;
-    maxAge = random.nextDouble() * 5 + 10;
+    maxAge = random.nextDouble() * 5 + 100;
 
     
 
@@ -64,7 +64,7 @@ class Particle {
 class Particles {
   List<Particle> particles = List();
 
-  Particles({count = 50}) {
+  Particles({count = 100}) {
     for (int i = 0; i < count; i++) {
       particles.add(Particle());
       particles[i].age = random.nextDouble()*particles[i].maxAge;
@@ -74,21 +74,21 @@ class Particles {
 
 class ParticlePainter extends CustomPainter {
   final Particles particles;
-  final double frameTime;
+  
 
-  ParticlePainter(this.particles, this.frameTime);
+  ParticlePainter(this.particles);
 
   @override
   void paint(Canvas canvas, Size size) {
     particles.particles.forEach((p) {
-      p.step(frameTime, size);
+  
       double ageRemaining = 1 - (p.age / p.maxAge);
       if (ageRemaining > 0) {
         final size = p.size;
         double opacity = (ageRemaining>0.8)?
           1- ((ageRemaining - 0.8) * 5):
           ageRemaining * 1.25;
-        opacity = opacity.clamp(0,0.5);
+        opacity = opacity.clamp(0,0.2);
         canvas.drawRect(Rect.fromCircle(center:Offset(p.x, p.y),radius: size),
             
             Paint()
@@ -103,6 +103,13 @@ class ParticlePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
+  }
+
+  void step(double frameTime, Size size) {
+    particles.particles.forEach((p) {
+      
+      p.step(frameTime, size);
+    });
   }
 }
 
