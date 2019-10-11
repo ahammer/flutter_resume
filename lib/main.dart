@@ -36,44 +36,9 @@ class MyApp extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             color: Colors.black),
-        AnimatedPaint(painter: ParticlesAnimation()),
+        AnimatedPaint(painter: kParticlesAnimation),
         Center(child: BusinessCard())
       ]),
     );
-  }
-}
-
-class FlashPainter extends AnimatedPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawRect(
-        Rect.fromCenter(
-            center: Offset(size.width / 2, 200.0), width: 50.0, height: 50.0),
-        Paint()
-          ..color = Color.fromARGB(255, Random().nextInt(255),
-              Random().nextInt(255), Random().nextInt(255)));
-  }
-
-  @override
-  void step(double frameTime) {
-    // TODO: implement step
-  }
-}
-
-class ParticlesAnimation extends AnimatedPainter {
-  ParticlePainter painter = ParticlePainter(Particles());
-  Size size;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    this.size = size;
-    painter.paint(canvas, size);
-  }
-
-  @override
-  void step(double frameTime) {
-    if (size != null) {
-      painter.step(frameTime, size);
-    }
   }
 }

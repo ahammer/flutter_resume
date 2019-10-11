@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/widgets/animated_painter.dart';
 final random = Random();
 const maxSize = 2000.0;
 
@@ -125,3 +126,24 @@ class ParticlePainter extends CustomPainter {
               ).createShader(Rect.fromCenter(
                   center: Offset(p.x, p.y), width: size, height: size))
  */
+
+
+class ParticlesAnimation extends AnimatedPainter {
+  ParticlePainter painter = ParticlePainter(Particles());
+  Size size;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    this.size = size;
+    painter.paint(canvas, size);
+  }
+
+  @override
+  void step(double frameTime) {
+    if (size != null) {
+      painter.step(frameTime, size);
+    }
+  }
+}
+
+final kParticlesAnimation = ParticlesAnimation();
