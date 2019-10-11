@@ -88,14 +88,16 @@ class ParticlePainter extends CustomPainter {
         double opacity = (ageRemaining>0.8)?
           1- ((ageRemaining - 0.8) * 5):
           ageRemaining * 1.25;
-        opacity = opacity.clamp(0,0.2);
+        opacity /= 2.0;
         canvas.drawRect(Rect.fromCircle(center:Offset(p.x, p.y),radius: size),
             
             Paint()
               ..blendMode = BlendMode.lighten
               ..isAntiAlias = false
               ..color = p.color.withOpacity(opacity)
-              ..style = PaintingStyle.stroke);
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = p.size / 50
+              );
       }
     });
   }
@@ -108,7 +110,7 @@ class ParticlePainter extends CustomPainter {
   void step(double frameTime, Size size) {
     particles.particles.forEach((p) {
       
-      p.step(frameTime, size);
+      p.step(frameTime/2, size);
     });
   }
 }
