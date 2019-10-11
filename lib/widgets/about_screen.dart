@@ -13,13 +13,10 @@ class AboutScreen extends StatelessWidget {
       children: <Widget>[
         Container(color: Colors.black, width: double.infinity, height: double.infinity),
         AnimatedPaint(painter: kParticlesAnimation),
-        Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Container(width: double.infinity, height: double.infinity,
-          child: Scaffold(backgroundColor: Theme.of(context).primaryColorDark.withAlpha(128),
-            appBar: AppBar(title: Text("Title"),),
-          ),
-          ),
+        Container(width: double.infinity, height: double.infinity,
+        child: Scaffold(backgroundColor: Theme.of(context).primaryColorDark.withAlpha(225),
+          appBar: AppBar(title: Text("Title"),),
+        ),
         ),
       ],
     );
