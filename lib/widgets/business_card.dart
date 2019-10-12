@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/screens/about/about_screen.dart';
 import 'package:resume_flutter/transitions/fade_route.dart';
-import 'package:resume_flutter/widgets/about_screen.dart';
+
 
 const kCardWidth = 320.0;
 const kCardHeight = 320.0;
