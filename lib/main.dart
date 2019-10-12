@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resume_flutter/screens/about/about_screen.dart';
 import 'package:resume_flutter/theme.dart';
-import 'package:resume_flutter/widgets/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +23,7 @@ class _MyAppState extends State<MyApp> {
             title: Text("Adam Hammer"),
             actions: <Widget>[
               DropdownButton(
-                  value: "Light",
+                  value: currentTheme,
                   icon: Icon(Icons.settings_brightness),
                   iconSize: 24,
                   elevation: 16,
