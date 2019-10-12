@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/screens/about/about_screen.dart';
 import 'package:resume_flutter/theme.dart';
 import 'package:resume_flutter/widgets/home_screen.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: getTheme(),
-      home: HomeScreen(),
+      home: AboutScreen(),
     );
   }
 }
