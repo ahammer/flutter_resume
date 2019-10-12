@@ -20,37 +20,61 @@ class AboutScreenBody extends StatefulWidget {
 }
 
 class _AboutScreenBodyState extends State<AboutScreenBody> {
-  bool opened = false;
+  String selected;
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width - kSideNavWidth;
-    final openOffset = kSideNavWidth-16.0;
-    final closedOffset = -width - 16;
+    
+
     return Stack(children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: AnimatedOpacity(
-          curve: Curves.easeOutExpo,
-          duration: const Duration(milliseconds: 600),
-          opacity: opened?1:0,
-          
-          child: AnimatedContainer(
-            curve: Curves.elasticOut,
-              transform: Transform.translate(offset: Offset(opened?openOffset:closedOffset,0)).transform,
-              duration: const Duration(milliseconds: 1000),
-              width: width,
-              height: double.infinity,
-              color: Colors.white38),
-        ),
-      ),
+      ContentPanel(opened: selected == "3D Printing", openOffset: kSideNavWidth-16.0,  closedOffset:-width - 16, width: width),
+      ContentPanel(opened: selected == "Photography", openOffset: kSideNavWidth-16.0,  closedOffset:-width - 16, width: width),
+      ContentPanel(opened: selected == "Robotics", openOffset: kSideNavWidth-16.0,  closedOffset:-width - 16, width: width),
+      ContentPanel(opened: selected == "Gaming", openOffset: kSideNavWidth-16.0,  closedOffset:-width - 16, width: width),
       AboutScreenSidebar(onClick:toggleOpened),
     ]);
   }
 
   void toggleOpened(String button) {
     setState((){
-      opened = !opened;
+      selected = button;
     });
+  }
+}
+
+class ContentPanel extends StatelessWidget {
+  const ContentPanel({
+    Key key,
+    @required this.opened,
+    @required this.openOffset,
+    @required this.closedOffset,
+    @required this.width,
+  }) : super(key: key);
+
+  final bool opened;
+  final double openOffset;
+  final double closedOffset;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: AnimatedOpacity(
+        curve: Curves.linearToEaseOut,
+        duration: const Duration(milliseconds: 600),
+        opacity: opened?1:0,
+        
+        child: AnimatedContainer(
+          curve: Curves.linearToEaseOut,
+            transform: Transform.translate(offset: Offset(opened?openOffset:closedOffset,0)).transform,
+            duration: const Duration(milliseconds: 1200),
+            width: width,
+            height: double.infinity,
+            color: Colors.white38),
+      ),
+    );
   }
 }
 
