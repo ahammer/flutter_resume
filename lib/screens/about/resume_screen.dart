@@ -175,8 +175,7 @@ class JobDetails extends StatelessWidget {
   Widget build(BuildContext context) => Card(
           child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-            child: JobDetailHeader(job: job)),
+        child: JobDetailHeader(job: job),
       ));
 }
 
