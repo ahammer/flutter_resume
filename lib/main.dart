@@ -23,20 +23,19 @@ class _MyAppState extends State<MyApp> {
         theme: getTheme(currentTheme),
         home: Scaffold(
             appBar: AppBar(
-              title: Text("Adam Hammer"),
+              title: MainScreenNavBar(
+                  selected: currentSection,
+                  onClick: (section) {
+                    setState(() {
+                      currentSection = section;
+                    });
+                  }),
               actions: <Widget>[
-                MainScreenNavBar(
-                    selected: currentSection,
-                    onClick: (section) {
-                      setState(() {
-                        currentSection = section;
-                      });
-                    }),
                 Container(
                   height: double.infinity,
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24,0,24,0),
+                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
                       child: DropdownButton(
                           value: currentTheme,
                           icon: Icon(Icons.settings_brightness),
@@ -83,7 +82,6 @@ class MainScreenNavBar extends StatelessWidget {
       children: <Widget>[
         ...kSections.map((hobby) => Container(
               child: RaisedButton(
-                
                   color: (selected == hobby)
                       ? Theme.of(context).chipTheme.selectedColor
                       : Theme.of(context).chipTheme.disabledColor,

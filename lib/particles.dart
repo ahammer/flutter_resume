@@ -32,7 +32,7 @@ class Particle {
 
     size = random.nextDouble() * maxSize;
     age = 0;
-    maxAge = random.nextDouble() * 5 + 5;
+    maxAge = random.nextDouble() * 5 + 25;
   }
 
   void step(double frameTime, Size size) {
@@ -61,7 +61,7 @@ class Particle {
 class Particles {
   List<Particle> particles = List();
 
-  Particles({count = 100}) {
+  Particles({count = 25}) {
     for (int i = 0; i < count; i++) {
       particles.add(Particle());
       particles[i].age = random.nextDouble() * particles[i].maxAge;
@@ -79,7 +79,7 @@ class ParticlePainter extends CustomPainter {
     particles.particles.forEach((p) {
       double ageRemaining = 1 - (p.age / p.maxAge);
       if (ageRemaining > 0) {
-        final size = p.size;
+        final size = p.size  * ((p.r1 < 0.5)?ageRemaining:(1-ageRemaining));
         double opacity = (ageRemaining > 0.8)
             ? 1 - ((ageRemaining - 0.8) * 5)
             : ageRemaining * 1.25;
@@ -87,11 +87,10 @@ class ParticlePainter extends CustomPainter {
         canvas.drawRect(
             Rect.fromCircle(center: Offset(p.x, p.y), radius: size),
             Paint()
-              ..blendMode = BlendMode.lighten
               ..isAntiAlias = false
               ..color = p.color.withOpacity(opacity)
               ..style = PaintingStyle.stroke
-              ..strokeWidth = p.size / 50
+              ..strokeWidth = p.size / 50 + 5
             /*
               ..shader = SweepGradient(center: FractionalOffset.center,
               startAngle: 0.0,
