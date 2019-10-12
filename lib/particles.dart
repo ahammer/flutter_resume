@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_flutter/widgets/animated_painter.dart';
+
 final random = Random();
 const maxSize = 2000.0;
 
@@ -17,8 +18,7 @@ class Particle {
   double size;
   double maxAge;
   double age;
-  final color = Colors.greenAccent;
-      
+  final color = Colors.blueAccent;
 
   Particle() {
     randomize(5000, 5000, firstBuild: true);
@@ -29,11 +29,10 @@ class Particle {
     y = random.nextDouble() * height;
     xs = (random.nextDouble() - 0.5) * 0.05;
     ys = (random.nextDouble() - 0.5) * 0.05;
-    
 
     size = random.nextDouble() * maxSize;
     age = 0;
-    maxAge = random.nextDouble() * 5+5;  
+    maxAge = random.nextDouble() * 5 + 5;
   }
 
   void step(double frameTime, Size size) {
@@ -65,37 +64,50 @@ class Particles {
   Particles({count = 100}) {
     for (int i = 0; i < count; i++) {
       particles.add(Particle());
-      particles[i].age = random.nextDouble()*particles[i].maxAge;
+      particles[i].age = random.nextDouble() * particles[i].maxAge;
     }
   }
 }
 
 class ParticlePainter extends CustomPainter {
   final Particles particles;
-  
 
   ParticlePainter(this.particles);
 
   @override
   void paint(Canvas canvas, Size size) {
     particles.particles.forEach((p) {
-  
       double ageRemaining = 1 - (p.age / p.maxAge);
       if (ageRemaining > 0) {
         final size = p.size;
-        double opacity = (ageRemaining>0.8)?
-          1- ((ageRemaining - 0.8) * 5):
-          ageRemaining * 1.25;
+        double opacity = (ageRemaining > 0.8)
+            ? 1 - ((ageRemaining - 0.8) * 5)
+            : ageRemaining * 1.25;
         opacity /= 2.0;
-        canvas.drawRect(Rect.fromCircle(center:Offset(p.x, p.y),radius: size),
-            
+        canvas.drawRect(
+            Rect.fromCircle(center: Offset(p.x, p.y), radius: size),
             Paint()
               ..blendMode = BlendMode.lighten
               ..isAntiAlias = false
               ..color = p.color.withOpacity(opacity)
               ..style = PaintingStyle.stroke
               ..strokeWidth = p.size / 50
-              );
+            /*
+              ..shader = SweepGradient(center: FractionalOffset.center,
+              startAngle: 0.0,
+              endAngle: pi * 2,
+
+                colors: <Color>[
+                  p.color.withOpacity(.8),
+                  p.color.withOpacity(0),
+                ],
+                stops: [
+                  0.0,
+                  1.0,
+                ],
+              ).createShader(Rect.fromCenter(
+                  center: Offset(p.x, p.y), width: size, height: size))*/
+            );
       }
     });
   }
@@ -107,8 +119,7 @@ class ParticlePainter extends CustomPainter {
 
   void step(double frameTime, Size size) {
     particles.particles.forEach((p) {
-      
-      p.step(frameTime/2, size);
+      p.step(frameTime / 2, size);
     });
   }
 }
@@ -126,7 +137,6 @@ class ParticlePainter extends CustomPainter {
               ).createShader(Rect.fromCenter(
                   center: Offset(p.x, p.y), width: size, height: size))
  */
-
 
 class ParticlesAnimation extends AnimatedPainter {
   ParticlePainter painter = ParticlePainter(Particles());

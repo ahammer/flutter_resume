@@ -28,7 +28,6 @@ class BusinessCard extends StatelessWidget {
               Container(
                 height: 16,
               ),
-
             ],
           ),
         ),

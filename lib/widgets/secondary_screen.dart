@@ -14,8 +14,7 @@ class SecondaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: <Widget>[
-        Container(color: Colors.black, width: double.infinity, height: double.infinity),
+      children: <Widget>[        
         AnimatedPaint(painter: kParticlesAnimation),
         Container(width: double.infinity, height: double.infinity,
         child:  body,
