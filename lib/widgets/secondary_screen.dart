@@ -18,10 +18,8 @@ class SecondaryScreen extends StatelessWidget {
         Container(color: Colors.black, width: double.infinity, height: double.infinity),
         AnimatedPaint(painter: kParticlesAnimation),
         Container(width: double.infinity, height: double.infinity,
-        child: Scaffold(backgroundColor: Theme.of(context).primaryColorDark.withAlpha(200),
-          appBar: AppBar(title: Text(title)),
-          body: body,
-        ),
+        child:  body,
+        
         ),
       ],
     );

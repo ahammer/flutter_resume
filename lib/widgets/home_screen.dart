@@ -10,13 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black),
-      AnimatedPaint(painter: kParticlesAnimation),
-      Center(child: BusinessCard())
-    ]);
+    return Center(child: BusinessCard());
   }
 }

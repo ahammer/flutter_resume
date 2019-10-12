@@ -72,7 +72,7 @@ class ContentPanel extends StatelessWidget {
             duration: const Duration(milliseconds: 1200),
             width: width,
             height: double.infinity,
-            color: Colors.white38),
+            color: Theme.of(context).colorScheme.surface),
       ),
     );
   }
