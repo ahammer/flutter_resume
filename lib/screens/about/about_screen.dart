@@ -93,7 +93,7 @@ class ContentPanel extends StatelessWidget {
                 color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(width: 2, color: Theme.of(context).colorScheme.primaryVariant),
-                backgroundBlendMode: BlendMode.hardLight,
+                
               ),
               curve: Curves.linearToEaseOut,
               transform: Transform.translate(
