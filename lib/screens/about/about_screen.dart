@@ -125,8 +125,8 @@ class AboutScreenSidebar extends StatelessWidget {
           ...kHobbies.map((hobby) => Container(
                 child: RaisedButton(
                     color: (selected == hobby)
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.primaryVariant,
+                      ? Theme.of(context).chipTheme.selectedColor
+                      : Theme.of(context).chipTheme.disabledColor,
                     child: Text(
                       hobby,
                       style: Theme.of(context).textTheme.button,
