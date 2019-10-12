@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:resume_flutter/screens/about/about_screen.dart';
+import 'package:resume_flutter/screens/about/resume_screen.dart';
 import 'package:resume_flutter/theme.dart';
 
 void main() => runApp(MyApp());
 
 const kSections = ["About", "Resume"];
+final kBodyNavigationKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
   @override
@@ -28,6 +30,7 @@ class _MyAppState extends State<MyApp> {
                   onClick: (section) {
                     setState(() {
                       currentSection = section;
+                      kBodyNavigationKey.currentState.pushReplacementNamed("/$currentSection");
                     });
                   }),
               actions: <Widget>[
@@ -60,10 +63,17 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
             body: MaterialApp(
+              navigatorKey: kBodyNavigationKey,
                 debugShowCheckedModeBanner: false,
                 theme: getTheme(currentTheme),
+                routes: {
+                  "/About" : (context) => AboutScreen(),
+                  "/Resume" : (context) => ResumeScreen()
+                },
                 home: AboutScreen())));
   }
+
+  
 }
 
 class MainScreenNavBar extends StatelessWidget {
@@ -80,16 +90,16 @@ class MainScreenNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        ...kSections.map((hobby) => Container(
+        ...kSections.map((job) => Container(
               child: RaisedButton(
-                  color: (selected == hobby)
+                  color: (selected == job)
                       ? Theme.of(context).chipTheme.selectedColor
                       : Theme.of(context).chipTheme.disabledColor,
                   child: Text(
-                    hobby,
+                    job,
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onPressed: () => onClick(hobby)),
+                  onPressed: () => onClick(job)),
             )),
       ],
     );
