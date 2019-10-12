@@ -74,6 +74,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   image:
     dependency: transitive
     description:
@@ -177,6 +182,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.1.6"
+  url_launcher_web:
+    dependency: "direct main"
+    description:
+      path: "packages/url_launcher/url_launcher_web"
+      ref: HEAD
+      resolved-ref: decb6b6f0081f44b25c05630f67a05921435d438
+      url: "git://github.com/flutter/plugins.git"
+    source: git
+    version: "0.0.1"
   vector_math:
     dependency: transitive
     description:
@@ -193,3 +214,4 @@ packages:
     version: "3.5.0"
 sdks:
   dart: ">=2.4.0 <3.0.0"
+  flutter: ">=1.5.0 <2.0.0"

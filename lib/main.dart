@@ -23,54 +23,61 @@ class _MyAppState extends State<MyApp> {
         title: 'Adam Hammer',
         debugShowCheckedModeBanner: false,
         theme: getTheme(currentTheme),
-        home: Scaffold(
-            appBar: AppBar(
-              title: MainScreenNavBar(
-                  selected: currentSection,
-                  onClick: (section) {
-                    setState(() {
-                      currentSection = section;
-                      kBodyNavigationKey.currentState.pushReplacementNamed("/$currentSection");
-                    });
-                  }),
-              actions: <Widget>[
-                Container(
-                  height: double.infinity,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                      child: DropdownButton(
-                          value: currentTheme,
-                          icon: Icon(Icons.settings_brightness),
-                          iconSize: 24,
-                          elevation: 16,
-                          onChanged: (value) {
-                            setState(() {
-                              currentTheme = value;
-                            });
-                          },
-                          items: ["Light", "Dark"]
-                              .map((val) => DropdownMenuItem<String>(
-                                  value: val,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(val),
-                                  )))
-                              .toList()),
-                    ),
+        home: buildMaterialScaffold());
+    
+
+        
+  }
+
+  Scaffold buildMaterialScaffold({Widget child}) {
+    return Scaffold(
+          appBar: AppBar(
+            title: MainScreenNavBar(
+                selected: currentSection,
+                onClick: (section) {
+                  setState(() {
+                    currentSection = section;
+                    kBodyNavigationKey.currentState.pushReplacementNamed("/$currentSection");
+                  });
+                }),
+            actions: <Widget>[
+              Container(
+                height: double.infinity,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                    child: DropdownButton(
+                        value: currentTheme,
+                        icon: Icon(Icons.settings_brightness),
+                        iconSize: 24,
+                        elevation: 16,
+                        onChanged: (value) {
+                          setState(() {
+                            currentTheme = value;
+                          });
+                        },
+                        items: ["Light", "Dark"]
+                            .map((val) => DropdownMenuItem<String>(
+                                value: val,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(val),
+                                )))
+                            .toList()),
                   ),
-                )
-              ],
-            ),
-            body: MaterialApp(
-              navigatorKey: kBodyNavigationKey,
-                debugShowCheckedModeBanner: false,
-                theme: getTheme(currentTheme),
-                routes: {
-                  "/About" : (context) => AboutScreen(),
-                  "/Resume" : (context) => ResumeScreen()
-                },
-                home: AboutScreen())));
+                ),
+              )
+            ],
+          ),
+          body: MaterialApp(
+            navigatorKey: kBodyNavigationKey,
+              debugShowCheckedModeBanner: false,
+              theme: getTheme(currentTheme),
+              routes: {
+                "/About" : (context) => AboutScreen(),
+                "/Resume" : (context) => ResumeScreen()
+              },
+              home: ResumeScreen()));
   }
 
   
