@@ -1,9 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:resume_flutter/particles.dart';
-import 'package:resume_flutter/widgets/animated_painter.dart';
-import 'package:resume_flutter/widgets/business_card.dart';
+import 'package:resume_flutter/widgets/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,14 +28,8 @@ class MyApp extends StatelessWidget {
                 fontSize: 42,
               ),
               display4: TextStyle(fontFamily: "Helvetica"))),
-      home: Stack(children: [
-        Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.black),
-        AnimatedPaint(painter: kParticlesAnimation),
-        Center(child: BusinessCard())
-      ]),
+      home: HomeScreen(),
     );
   }
 }
+
