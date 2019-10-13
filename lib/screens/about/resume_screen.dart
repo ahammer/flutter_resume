@@ -17,7 +17,7 @@ final Map<String, WidgetBuilder> kJobExperienceWidgets = {
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Lorem ipsum dolar")),
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
   "PNI/Staples": (context) => Container(
       width: double.infinity, height: double.infinity, color: Colors.blueGrey),
   "Atimi": (context) => Container(
@@ -167,15 +167,33 @@ class Job {
 
 class JobDetails extends StatelessWidget {
   final Job job;
-  
-  JobDetails(this.job);
 
+  JobDetails(this.job);
 
   @override
   Widget build(BuildContext context) => Card(
-          child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: JobDetailHeader(job: job),
+          child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            pinned: true,
+            title: JobDetailHeader(job: job),
+          ),
+          SliverList(
+            
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24,0,16,0),
+                child: Container(color: Theme.of(context).colorScheme.surface, child:Text("Summary", style: Theme.of(context).textTheme.title)),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24,12,16,0),
+                child: Container(color: Theme.of(context).colorScheme.surface, child:Text(job.summary)),
+              ),
+            
+            ]),
+          )
+        ],
       ));
 }
 
@@ -187,41 +205,41 @@ class JobDetailHeader extends StatelessWidget {
     @required this.job,
   }) : super(key: key);
 
-  final Job job;  
+  final Job job;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-          children: <Widget>[
-    Container(
-        width: double.infinity,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-                child: Container(
-                    alignment: FractionalOffset.bottomLeft,
-                    child: Text(job.company,
-                        style: Theme.of(context).textTheme.display1))),
-            Expanded(
-                child: Container(
-                    height: topRowHeight,
-                    alignment: FractionalOffset.bottomCenter,
-                    child: Text(job.startDate.toString(),
-                        style: Theme.of(context).textTheme.title))),
-            Expanded(
-                child: Container(
-                    height: topRowHeight,
-                    alignment: FractionalOffset.bottomRight,
-                    child: Text(job.title,
-                        style: Theme.of(context).textTheme.title))),
-          ],
-        )),
-    Container(
-      width: double.infinity,
-      height: 2,
-      color: Theme.of(context).colorScheme.onSurface,
-    )
-          ],
-        );
+      children: <Widget>[
+        Container(
+            width: double.infinity,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Container(
+                        alignment: FractionalOffset.bottomLeft,
+                        child: Text(job.company,
+                            style: Theme.of(context).textTheme.display1))),
+                Expanded(
+                    child: Container(
+                        height: topRowHeight,
+                        alignment: FractionalOffset.bottomCenter,
+                        child: Text(job.startDate.toString(),
+                            style: Theme.of(context).textTheme.title))),
+                Expanded(
+                    child: Container(
+                        height: topRowHeight,
+                        alignment: FractionalOffset.bottomRight,
+                        child: Text(job.title,
+                            style: Theme.of(context).textTheme.title))),
+              ],
+            )),
+        Container(
+          width: double.infinity,
+          height: 2,
+          color: Theme.of(context).colorScheme.onSurface,
+        )
+      ],
+    );
   }
 }
