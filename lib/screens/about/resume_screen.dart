@@ -18,16 +18,56 @@ final Map<String, WidgetBuilder> kJobExperienceWidgets = {
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
       summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
-  "PNI/Staples": (context) => Container(
-      width: double.infinity, height: double.infinity, color: Colors.blueGrey),
-  "Atimi": (context) => Container(
-      width: double.infinity, height: double.infinity, color: Colors.blueGrey),
-  "Mirabel": (context) => Container(
-      width: double.infinity, height: double.infinity, color: Colors.blueGrey),
-  "AFSI": (context) => Container(
-      width: double.infinity, height: double.infinity, color: Colors.blueGrey),
-  "MindQuake": (context) => Container(
-      width: double.infinity, height: double.infinity, color: Colors.blueGrey),
+  "PNI/Staples": (context) => JobDetails(Job(
+      company: "Realtor.com",
+      title: "Staff Engineer",
+      achievements: ["a", "b", "c"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["a", "b", "c"],
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
+
+  "Atimi": (context) => JobDetails(Job(
+      company: "Realtor.com",
+      title: "Staff Engineer",
+      achievements: ["a", "b", "c"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["a", "b", "c"],
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
+
+  "Mirabel": (context) =>JobDetails(Job(
+      company: "Realtor.com",
+      title: "Staff Engineer",
+      achievements: ["a", "b", "c"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["a", "b", "c"],
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
+
+  "AFSI": (context) =>JobDetails(Job(
+      company: "Realtor.com",
+      title: "Staff Engineer",
+      achievements: ["a", "b", "c"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["a", "b", "c"],
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
+
+  "MindQuake": (context) => JobDetails(Job(
+      company: "Realtor.com",
+      title: "Staff Engineer",
+      achievements: ["a", "b", "c"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["a", "b", "c"],
+      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion.")),
+
 };
 
 class ResumeScreenBody extends StatefulWidget {
@@ -39,39 +79,19 @@ class ResumeScreenBody extends StatefulWidget {
   _ResumeScreenBodyState createState() => _ResumeScreenBodyState();
 }
 
-class _ResumeScreenBodyState extends State<ResumeScreenBody> {
-  String selected = "Realtor.com";
+class _ResumeScreenBodyState extends State<ResumeScreenBody> {  
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        ResumeNavigator(
-          onClick: toggleOpened,
-          selected: selected,
-        ),
-        Expanded(
-          child: Stack(children: <Widget>[
-            ...kJobExperienceWidgets.keys
-                .map((job) => ContentPanel(
-                    child: kJobExperienceWidgets[job](context),
-                    opened: selected == job,
-                    openOffset: 0,
-                    closedOffset: -width,
-                    width: width))
-                .toList(),
-          ]),
-        ),
-      ],
-    );
+    return ContentPanel(
+            child: kJobExperienceWidgets["Realtor.com"](context),
+            opened: true,
+            openOffset: 0,
+            closedOffset: -width,
+            width: width);
   }
 
-  void toggleOpened(String button) {
-    setState(() {
-      selected = button;
-    });
-  }
 }
 
 class ContentPanel extends StatelessWidget {

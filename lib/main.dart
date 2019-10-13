@@ -2,94 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:resume_flutter/screens/about/about_screen.dart';
 import 'package:resume_flutter/screens/about/resume_screen.dart';
 import 'package:resume_flutter/theme.dart';
+import 'package:resume_flutter/transitions/fade_route.dart';
 
 void main() => runApp(MyApp());
 
 const kSections = ["About", "Resume"];
-final kBodyNavigationKey = GlobalKey<NavigatorState>();
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String currentTheme = "Light";
-  String currentSection = "About";
+class MyApp extends StatelessWidget {
+  final String currentTheme = "Light";
+  final String currentSection = "About";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Adam Hammer',
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,        
         theme: getTheme(currentTheme),
-        home: buildMaterialScaffold());
-    
-
+        home: MyPortfolioScaffold(route: "Resume", theme: "Light", child: ResumeScreen(),),        
         
+        onGenerateRoute: (settings) {
+          switch(settings.name) {
+            case "/About" : 
+              return FadeRoute(page: MyPortfolioScaffold(route: "About", theme: "Light", child: AboutScreen(),),        );
+            case "/Resume" : 
+              return FadeRoute(page: MyPortfolioScaffold(route: "Resume", theme: "Light", child: ResumeScreen(),),        );
+            default:
+              return FadeRoute(page:Container(child:Text("Empty")));
+          }
+        }, 
+
+        );  
   }
 
-  Scaffold buildMaterialScaffold({Widget child}) {
+    
+}
+
+class MyPortfolioScaffold extends StatelessWidget {
+  final String route;
+  final String theme;
+  final Widget child;
+
+  const MyPortfolioScaffold({
+    Key key, this.route, this.theme, this.child,
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
             title: MainScreenNavBar(
-                selected: currentSection,
-                onClick: (section) {
-                  setState(() {
-                    currentSection = section;
-                    kBodyNavigationKey.currentState.pushReplacementNamed("/$currentSection");
-                  });
-                }),
+                selected: route,),
             actions: <Widget>[
-              Container(
-                height: double.infinity,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-                    child: DropdownButton(
-                        value: currentTheme,
-                        icon: Icon(Icons.settings_brightness),
-                        iconSize: 24,
-                        elevation: 16,
-                        onChanged: (value) {
-                          setState(() {
-                            currentTheme = value;
-                          });
-                        },
-                        items: ["Light", "Dark"]
-                            .map((val) => DropdownMenuItem<String>(
-                                value: val,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(val),
-                                )))
-                            .toList()),
-                  ),
-                ),
-              )
             ],
           ),
-          body: MaterialApp(
-            navigatorKey: kBodyNavigationKey,
-              debugShowCheckedModeBanner: false,
-              theme: getTheme(currentTheme),
-              routes: {
-                "/About" : (context) => AboutScreen(),
-                "/Resume" : (context) => ResumeScreen()
-              },
-              home: ResumeScreen()));
+          body: (child == null)?ResumeScreen():child);
   }
-
-  
 }
 
+
 class MainScreenNavBar extends StatelessWidget {
-  final Function(String) onClick;
+  
   final String selected;
 
   const MainScreenNavBar({
     Key key,
-    @required this.onClick,
+    
     @required this.selected,
   }) : super(key: key);
 
@@ -105,8 +83,10 @@ class MainScreenNavBar extends StatelessWidget {
                   child: Text(
                     job,
                     style: Theme.of(context).textTheme.button,
+                  ), onPressed: () {
+                    Navigator.of(context).pushReplacementNamed("/"+job);
+                  },
                   ),
-                  onPressed: () => onClick(job)),
             )),
       ],
     );

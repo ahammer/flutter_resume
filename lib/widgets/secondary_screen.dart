@@ -1,8 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:resume_flutter/widgets/animated_painter.dart';
 import 'package:resume_flutter/particles.dart';
-
+import 'animated_painter.dart';
 class SecondaryScreen extends StatelessWidget {
   final String title;
   final Widget body;
