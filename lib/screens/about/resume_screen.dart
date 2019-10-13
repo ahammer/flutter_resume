@@ -16,28 +16,29 @@ final Map<String, Job> kJobExperienceWidgets = {
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
+      skills: <String>["Android", "Flutter", "Java", "Kotlin", "RxJava", "RetroFit", "Analytics", "Architecture"],
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "PNI/Staples": Job(
-      company: "Realtor.com",
+      company: "Realtor.com1",
       title: "Staff Engineer",
       achievements: ["a", "b", "c"],
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "Atimi": Job(
-      company: "Realtor.com",
+      company: "Realtor.com2",
       title: "Staff Engineer",
       achievements: ["a", "b", "c"],
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "Mirabel": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
@@ -46,8 +47,8 @@ final Map<String, Job> kJobExperienceWidgets = {
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "AFSI": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
@@ -56,8 +57,8 @@ final Map<String, Job> kJobExperienceWidgets = {
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "MindQuake": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
@@ -66,8 +67,8 @@ final Map<String, Job> kJobExperienceWidgets = {
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
-      summary: "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
+      summary:
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
 };
 
 class ResumeScreenBody extends StatefulWidget {
@@ -79,45 +80,53 @@ class ResumeScreenBody extends StatefulWidget {
   _ResumeScreenBodyState createState() => _ResumeScreenBodyState();
 }
 
-class _ResumeScreenBodyState extends State<ResumeScreenBody> {  
-
+class _ResumeScreenBodyState extends State<ResumeScreenBody> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final List<Widget> slivers = List();
-    kJobExperienceWidgets.values.map((job)=>getJobDetailSlivers(context, job)).forEach((it)=>slivers.addAll(it));
+    kJobExperienceWidgets.values
+        .map((job) => getJobDetailSlivers(context, job))
+        .forEach((it) => slivers.addAll(it));
 
     return ContentPanel(
-            child: Card(color:  Theme.of(context).colorScheme.surface.withOpacity(0.8),child:CustomScrollView(slivers: slivers)),
-            opened: true,
-            openOffset: 0,
-            closedOffset: -width,
-            width: width);
+        child: Card(
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
+            child: CustomScrollView(slivers: slivers)),
+        opened: true,
+        openOffset: 0,
+        closedOffset: -width,
+        width: width);
   }
 
-  
-List<Widget> getJobDetailSlivers(BuildContext context, Job job) => <Widget>[
-          SliverAppBar(
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            pinned: true,
-            title: JobDetailHeader(job: job),
-          ),
-          SliverList(
-            
-            delegate: SliverChildListDelegate([
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24,0,16,0),
-                child: Container( child:Text("Summary", style: Theme.of(context).textTheme.title)),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24,12,16,0),
-                child: Container( child:Text(job.summary)),
-              ),
-            
-            ]),
-          )
-        ];
-
+  List<Widget> getJobDetailSlivers(BuildContext context, Job job) => <Widget>[
+        SliverList(
+          delegate: SliverChildListDelegate([
+            Container(height:12),
+            JobDetailHeader(job: job),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
+              child: Container(child: Text(job.summary)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
+              child: Container(
+                width:double.infinity,
+                  child: Wrap(
+                children: <Widget>[
+                  ...(job.skills
+                      .map((skill) => Padding(
+                        padding: const EdgeInsets.fromLTRB(4,0,4,0),
+                        child: Chip(label: Text(skill)),
+                      ))
+                      .toList()),
+                ],
+                direction: Axis.horizontal,
+              )),
+            ),
+          ]),
+        )
+      ];
 }
 
 class ContentPanel extends StatelessWidget {
@@ -211,7 +220,6 @@ class Job {
       @required this.achievements});
 }
 
-
 class JobDetailHeader extends StatelessWidget {
   final topRowHeight = 36.0;
 
@@ -226,34 +234,54 @@ class JobDetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0,18,0,0),
-          child: Container(
-              width: double.infinity,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                      child: Container(
-                          alignment: FractionalOffset.bottomLeft,
-                          child: Text(job.company,
-                              style: Theme.of(context).textTheme.display1.copyWith(fontSize: 22)))),
-                  Expanded(
-                      child: Container(                        
-                          alignment: FractionalOffset.bottomCenter,
-                          child: Text(job.startDate.toString(),
-                              style: Theme.of(context).textTheme.display1.copyWith(fontSize: 22)))),
-                  Expanded(
-                      child: Container(                        
-                          alignment: FractionalOffset.bottomRight,
-                          child: Text(job.title,
-                              style: Theme.of(context).textTheme.display1.copyWith(fontSize: 22)))),
-                ],
-              )),
-        ),
         Container(
-          width: double.infinity,
-          height: 2,
-          color: Theme.of(context).colorScheme.onSurface,
+            width: double.infinity,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                    flex: 10,
+                    child: Container(
+                        alignment: FractionalOffset.bottomLeft,
+                        child: Text(job.company,
+                            style: Theme.of(context)
+                                .textTheme
+                                .display1
+                                .copyWith(fontSize: 22)))),
+                Expanded(
+                    flex: 10,
+                    child: Container(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: Text(job.startDate.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .display1
+                                .copyWith(fontSize: 14)))),
+                Expanded(
+                    flex: 10,
+                    child: Container(
+                        alignment: FractionalOffset.bottomRight,
+                        child: Text(job.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .display1
+                                .copyWith(fontSize: 22)))),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+              ],
+            )),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Container(
+            width: double.infinity,
+            height: 2,
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+          ),
         )
       ],
     );
