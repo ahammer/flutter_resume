@@ -73,7 +73,7 @@ class MyPortfolioScaffold extends StatelessWidget {
             selected: route,
           ),
           actions: <Widget>[
-            DropdownButton(onChanged: (value)=>state.setTheme(value), value:state.getTheme(),items: ["Light", "Dark"].map((item)=>DropdownMenuItem(value: item, child: Text(item))).toList()),
+            Center(child: DropdownButton(onChanged: (value)=>state.setTheme(value), value:state.getTheme(),items: ["Light", "Dark"].map((item)=>DropdownMenuItem(value: item, child: Text(item))).toList())),
           ],
         ),
         
