@@ -82,7 +82,7 @@ class ContentPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
+      padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
       child: AnimatedOpacity(
           curve: Curves.linearToEaseOut,
           duration: const Duration(milliseconds: 600),
@@ -90,7 +90,7 @@ class ContentPanel extends StatelessWidget {
           child: AnimatedContainer(
             
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
+                color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(width: 2, color: Theme.of(context).colorScheme.primaryVariant),
                 

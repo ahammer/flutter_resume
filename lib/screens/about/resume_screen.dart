@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/theme.dart';
 import 'package:resume_flutter/widgets/secondary_screen.dart';
 
 class ResumeScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ final Map<String, Job> kJobExperienceWidgets = {
         "Designed analytics frameworks",
         "Designed search frameworks",
         "Designed testing frameworks",
-        "Managed CI processes (Jenkins/Github)",      
+        "Managed CI processes (Jenkins/Github)",
         "Integrated 3rd party software",
         "Migrated Legacy to Retrofit",
         "Redesigned Details Screen Architecture",
@@ -26,11 +27,11 @@ final Map<String, Job> kJobExperienceWidgets = {
         "Detangled large sections of monolithic codebase",
         "Helped refine Agile and Team processes",
         "Provided support for team members",
-        "Handled co-op hiring and interview process",        
+        "Handled co-op hiring and interview process",
       ],
       roles: [],
       endDate: DateTime.now(),
-      startDate: DateTime.now(),      
+      startDate: DateTime.now(),
       skills: <String>[
         "Android",
         "Flutter",
@@ -128,33 +129,72 @@ class _ResumeScreenBodyState extends State<ResumeScreenBody> {
           delegate: SliverChildListDelegate([
             Container(height: 12),
             JobDetailHeader(job: job),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
-              child: Container(child: Text(job.summary)),
+            JobSummaryWidget(job: job),
+            JobSkillsWidget(
+              job: job,
             ),
-            //Draw the skills
-            Row(
-              children: <Widget>[
-                Expanded(child:Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(child:Text(
-                     (job.achievements
-                  .fold<String>("Achievements: \n\n", (ret, job) => ret += ">    $job\n").trim())
-                  ), alignment: FractionalOffset.topLeft),
-                )),
-                JobSkillsWidget(job: job,),
-              ],
-            ),
+            AchiementsWidget(job: job),
           ]),
         )
       ];
 }
 
+class AchiementsWidget extends StatelessWidget {
+  final Job job;
+  const AchiementsWidget({
+    Key key,
+    this.job,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Text(
+            (job.achievements
+                .fold<String>(
+                    "Achievements: \n", (ret, job) => ret += ">    $job\n")
+                .trim()),
+            style: Theme.of(context).textTheme.body1.copyWith(
+                fontFamily: kDefaultFont,
+                color:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.8))),
+        alignment: FractionalOffset.topLeft,
+      ),
+    );
+  }
+}
+
+class JobSummaryWidget extends StatelessWidget {
+  final Job job;
+  const JobSummaryWidget({
+    Key key,
+    this.job,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
+      child: Container(
+          child: Text(
+        job.summary,
+        style: Theme.of(context)
+            .textTheme
+            .body1
+            .copyWith(fontFamily: kDefaultFont),
+      )),
+    );
+  }
+}
+
 class JobSkillsWidget extends StatelessWidget {
   final Job job;
-  
+
   const JobSkillsWidget({
-    Key key, this.job,
+    Key key,
+    this.job,
   }) : super(key: key);
 
   @override
@@ -162,21 +202,30 @@ class JobSkillsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
-        width:120,
+          width: 120,
           decoration: BoxDecoration(
               border: Border.all(),
-              borderRadius: BorderRadius.circular(2)),
-          
+              color: Theme.of(context).colorScheme.surface,
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 3, offset: Offset(2, 2), color: Colors.black)
+              ],
+              borderRadius: BorderRadius.circular(4)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               (job.skills
-                  .fold<String>("", (ret, job) => ret += "$job\n").trim()),
+                  .fold<String>("", (ret, job) => ret += "$job  ")
+                  .trim()),
               style: Theme.of(context).textTheme.body1.copyWith(
-                fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.secondary,
-                  backgroundColor: Theme.of(context).colorScheme.surface),
-                  textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: kDefaultFont,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.7),
+                  ),
+              textAlign: TextAlign.center,
             ),
           )),
     );
@@ -202,12 +251,13 @@ class ContentPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
+      padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
       child: AnimatedOpacity(
           curve: Curves.linearToEaseOut,
           duration: const Duration(milliseconds: 600),
-          opacity: opened ? 1 : 0,
+          opacity: opened ? 0.9 : 0,
           child: AnimatedContainer(
+            
               child: child,
               curve: Curves.linearToEaseOut,
               transform: Transform.translate(
@@ -215,40 +265,6 @@ class ContentPanel extends StatelessWidget {
                   .transform,
               duration: const Duration(milliseconds: 1200),
               width: width)),
-    );
-  }
-}
-
-class ResumeNavigator extends StatelessWidget {
-  final Function(String) onClick;
-  final String selected;
-
-  const ResumeNavigator({
-    Key key,
-    @required this.onClick,
-    @required this.selected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.primaryVariant,
-      width: double.infinity,
-      child: Row(
-        children: <Widget>[
-          ...kJobExperienceWidgets.keys.map((hobby) => Container(
-                child: RaisedButton(
-                    color: (selected == hobby)
-                        ? Theme.of(context).chipTheme.selectedColor
-                        : Theme.of(context).chipTheme.disabledColor,
-                    child: Text(
-                      hobby,
-                      style: Theme.of(context).textTheme.button,
-                    ),
-                    onPressed: () => onClick(hobby)),
-              )),
-        ],
-      ),
     );
   }
 }
@@ -301,28 +317,30 @@ class JobDetailHeader extends StatelessWidget {
                     child: Container(
                         alignment: FractionalOffset.bottomLeft,
                         child: Text(job.company,
-                            style: Theme.of(context)
-                                .textTheme
-                                .display1
-                                .copyWith(fontSize: 22)))),
+                            style: Theme.of(context).textTheme.title.copyWith(
+                                fontSize: 22,
+                                fontFamily: kDefaultFont,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurface
+                                    .withOpacity(0.7))))),
                 Expanded(
                     flex: 10,
                     child: Container(
+                        height: 22,
                         alignment: FractionalOffset.bottomCenter,
                         child: Text(job.startDate.toString(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .display1
-                                .copyWith(fontSize: 14)))),
+                            style: Theme.of(context).textTheme.title.copyWith(
+                                fontSize: 12, fontFamily: kDefaultFont)))),
                 Expanded(
                     flex: 10,
                     child: Container(
+                        height: 22,
                         alignment: FractionalOffset.bottomRight,
                         child: Text(job.title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .display1
-                                .copyWith(fontSize: 22)))),
+                            style: Theme.of(context).textTheme.title.copyWith(
+                                fontSize: 12, fontFamily: kDefaultFont)))),
                 Expanded(
                   flex: 1,
                   child: Container(),

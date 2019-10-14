@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_flutter/widgets/animated_painter.dart';
 
 final random = Random();
-const maxSize = 2000.0;
+const maxSize = 300.0;
 
 class Particle {
   double x, y, xs, ys;
@@ -27,12 +27,12 @@ class Particle {
   void randomize(double width, double height, {bool firstBuild = false}) {
     x = random.nextDouble() * width;
     y = random.nextDouble() * height;
-    xs = (random.nextDouble() - 0.5) * 0.05;
-    ys = (random.nextDouble() - 0.5) * 0.05;
+    xs = (random.nextDouble() - 0.5);
+    ys = (random.nextDouble() - 0.5);
 
     size = random.nextDouble() * maxSize;
     age = 0;
-    maxAge = random.nextDouble() * 5 + 25;
+    maxAge = random.nextDouble() * 60 + 200;
   }
 
   void step(double frameTime, Size size) {
@@ -61,7 +61,7 @@ class Particle {
 class Particles {
   List<Particle> particles = List();
 
-  Particles({count = 25}) {
+  Particles({count = 100}) {
     for (int i = 0; i < count; i++) {
       particles.add(Particle());
       particles[i].age = random.nextDouble() * particles[i].maxAge;
@@ -90,7 +90,7 @@ class ParticlePainter extends CustomPainter {
               ..isAntiAlias = false
               ..color = p.color.withOpacity(opacity)
               ..style = PaintingStyle.stroke
-              ..strokeWidth = p.size / 50 + 5
+              ..strokeWidth = p.size / 500 + 2
             /*
               ..shader = SweepGradient(center: FractionalOffset.center,
               startAngle: 0.0,
