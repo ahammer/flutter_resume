@@ -84,6 +84,8 @@ final Map<String, Job> kJobExperienceWidgets = {
         "RetroFit",
         "Analytics",
         "Architecture"
+        "Jenkins",
+        "Jira"
       ],
       summary:
           "Staff Engineer on the Mobile teams. Spearheaded many initiatives "
@@ -104,7 +106,7 @@ final Map<String, Job> kJobExperienceWidgets = {
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
-      skills: <String>["Android", "Java", "Kotlin", "Flutter", "OpenGL", "LibGDX", "Unreal Engine", "Wicket"],
+      skills: <String>["Android", "Java", "Kotlin", "Flutter", "OpenGL", "LibGDX", "Unreal Engine", "Wicket", "Jira"],
       summary:
           "Indie gaming and project work. Various projects taken over the years."),
 
@@ -121,62 +123,50 @@ final Map<String, Job> kJobExperienceWidgets = {
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
+      skills: <String>["Java", "Android", "Jira"],
       summary:
           "While at Pni, I used my experience to improve their platform and tools, and help implement"
           "new products on their platform"),
 
 
+
+  "Tio": Job(
+      company: "Tio Networks",
+      title: "Senior Mobile Engineer",
+      achievements: ["Developed TioMobilePay (android)", "Deployed (PG&E, Mobilicity, El Paso Electric, TioMobilePay) branded versions.", "Branded C# Payment Kiosk"],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["Android", "Java", ".NET", "Jira"],
+      summary:
+          "Helped build and deliver the Android version of Tio&#39;s mobile pay framework. This software"
+          "vertical allows bill-payment in a generic app, as well as client-branded bill payment"
+          "applications"),
+
+
 /*
-Tio Networks, Vancouver, BC 11/2011 – 11/2013
+Atimi Software, Vancouver 12/2010 – 10/2011
 Senior Android Developer
- Helped build and deliver the Android version of Tio&#39;s mobile pay framework. This software
-vertical allows bill-payment in a generic app, as well as client-branded bill payment
-applications
- Tio Networks Bill payment platform:
-o PG&amp;E Mobile payments App
-o Mobilicity Payments App
-o El Paso Electric Payments App
-o Tio Mobile Pay
-Tio&#39;s applications are centered on bill payment for 3rd party power and mobile companies.
-We deploy several applications each quarter to various markets.
+ Engineer and Architect of the Atimi Mobile Sport Framework Atimi Sports Framework
+Apps.
+ In 8 months we developed Applications for the following sports teams:
+o Version 1.x: Canucks, Blackhawks, Flames
+o Version 2.0: Senators, Lions
+o Pending Release: Rangers, Canadiens
+ Lead a team of varying size up to 4 developers.
+ Optimized and improved company processes
 */
-  "Mirabel": Job(
-      company: "Realtor.com",
+
+  "Atimi": Job(
+      company: "Atimi Software",
       title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
+      achievements: ["Deleveloped Atimi Mobile Sports Framework", "Developed Canucks, Blackhawks, Flames, Senators, Lions, Rangers and Canadiens apps", "Led a team of 4 developers", "Optimized development processes"],
+      endDate:DateTime.utc(2010, DateTime.december),
+      startDate: DateTime.utc(2011, DateTime.october),
       roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
+      skills: <String>["Android", "Java", "Jira"],
       summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
-
-  "AFSI": Job(
-      company: "Realtor.com",
-      title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
-      roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
-      summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-
-
-
-
-  "MindQuake": Job(
-      company: "Realtor.com",
-      title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
-      roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
-      summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
+          "Senior Android Engineer. Developed mobile sports framework and deployed numerous brandings."),
 };
 
 class ResumeScreenBody extends StatefulWidget {
@@ -217,6 +207,7 @@ class _ResumeScreenBodyState extends State<ResumeScreenBody> {
               job: job,
             ),
             AchiementsWidget(job: job),
+            Container(height:72),
           ]),
         )
       ];
@@ -287,11 +278,11 @@ class JobSkillsWidget extends StatelessWidget {
       child: Container(
           width: 120,
           decoration: BoxDecoration(
-              border: Border.all(),
+              border: Border.all(color: Colors.black26),
               color: Theme.of(context).colorScheme.surface,
               boxShadow: [
                 BoxShadow(
-                    blurRadius: 3, offset: Offset(2, 2), color: Colors.black)
+                    blurRadius: 3, offset: Offset(2, 2), color: Colors.black38)
               ],
               borderRadius: BorderRadius.circular(4)),
           child: Padding(
