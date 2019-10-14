@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:resume_flutter/widgets/animated_painter.dart';
 
 final random = Random();
-const maxSize = 300.0;
+const maxSize = 1000.0;
 
 class Particle {
   double x, y, xs, ys;
@@ -27,8 +27,8 @@ class Particle {
   void randomize(double width, double height, {bool firstBuild = false}) {
     x = random.nextDouble() * width;
     y = random.nextDouble() * height;
-    xs = (random.nextDouble() - 0.5);
-    ys = (random.nextDouble() - 0.5);
+    xs = (random.nextDouble() - 0.5) * 0.1;
+    ys = (random.nextDouble() - 0.5) * 0.1;
 
     size = random.nextDouble() * maxSize;
     age = 0;
