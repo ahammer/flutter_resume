@@ -12,7 +12,7 @@ final Map<String, Job> kJobExperienceWidgets = {
   "Realtor.com": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
+      achievements: ["Migrated all analytics behind a facade/plugin structure", "Oversaw migration to Segment IO", "Migrated Legacy to Retrofit", "Redesigned Details Screen Architecture", "Deployed Instant App"],
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
