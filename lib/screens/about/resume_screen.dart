@@ -12,11 +12,35 @@ final Map<String, Job> kJobExperienceWidgets = {
   "Realtor.com": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
-      achievements: ["Migrated all analytics behind a facade/plugin structure", "Oversaw migration to Segment IO", "Migrated Legacy to Retrofit", "Redesigned Details Screen Architecture", "Deployed Instant App"],
+      achievements: [
+        "Championed flutter migration",
+        "Championed instant app implementation",
+        "Designed analytics frameworks",
+        "Designed search frameworks",
+        "Designed testing frameworks",
+        "Managed CI processes (Jenkins/Github)",      
+        "Integrated 3rd party software",
+        "Migrated Legacy to Retrofit",
+        "Redesigned Details Screen Architecture",
+        "Deployed Instant App",
+        "Detangled large sections of monolithic codebase",
+        "Helped refine Agile and Team processes",
+        "Provided support for team members",
+        "Handled co-op hiring and interview process",        
+      ],
+      roles: [],
       endDate: DateTime.now(),
-      startDate: DateTime.now(),
-      roles: <String>["a", "b", "c"],
-      skills: <String>["Android", "Flutter", "Java", "Kotlin", "RxJava", "RetroFit", "Analytics", "Architecture"],
+      startDate: DateTime.now(),      
+      skills: <String>[
+        "Android",
+        "Flutter",
+        "Java",
+        "Kotlin",
+        "RxJava",
+        "RetroFit",
+        "Analytics",
+        "Architecture"
+      ],
       summary:
           "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
   "PNI/Staples": Job(
@@ -102,31 +126,61 @@ class _ResumeScreenBodyState extends State<ResumeScreenBody> {
   List<Widget> getJobDetailSlivers(BuildContext context, Job job) => <Widget>[
         SliverList(
           delegate: SliverChildListDelegate([
-            Container(height:12),
+            Container(height: 12),
             JobDetailHeader(job: job),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
               child: Container(child: Text(job.summary)),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 16, 0),
-              child: Container(
-                width:double.infinity,
-                  child: Wrap(
-                children: <Widget>[
-                  ...(job.skills
-                      .map((skill) => Padding(
-                        padding: const EdgeInsets.fromLTRB(4,0,4,0),
-                        child: Chip(label: Text(skill)),
-                      ))
-                      .toList()),
-                ],
-                direction: Axis.horizontal,
-              )),
+            //Draw the skills
+            Row(
+              children: <Widget>[
+                Expanded(child:Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(child:Text(
+                     (job.achievements
+                  .fold<String>("Achievements: \n\n", (ret, job) => ret += ">    $job\n").trim())
+                  ), alignment: FractionalOffset.topLeft),
+                )),
+                JobSkillsWidget(job: job,),
+              ],
             ),
           ]),
         )
       ];
+}
+
+class JobSkillsWidget extends StatelessWidget {
+  final Job job;
+  
+  const JobSkillsWidget({
+    Key key, this.job,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        width:120,
+          decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(2)),
+          
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              (job.skills
+                  .fold<String>("", (ret, job) => ret += "$job\n").trim()),
+              style: Theme.of(context).textTheme.body1.copyWith(
+                fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.secondary,
+                  backgroundColor: Theme.of(context).colorScheme.surface),
+                  textAlign: TextAlign.center,
+            ),
+          )),
+    );
+  }
 }
 
 class ContentPanel extends StatelessWidget {
