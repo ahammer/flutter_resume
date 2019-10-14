@@ -8,12 +8,55 @@ class ResumeScreen extends StatelessWidget {
       SecondaryScreen(title: "About", body: ResumeScreenBody());
 }
 
+/*
+Top Producer Systems, Vancouver, BC 5/2015 – Present
+Senior Android Developer
+ Worked with the Realtor.com mobile app
+ Audited systems health and quality
+ Decoupled components, provided architectural advice
+ Migrated code from old to new systems
+ Advised and trained staff, as well as helped with hiring process
+ Devised long term plan to improve code quality
+At Top Producer I was brought on to consult as a Android subject expert, to audit and
+improve the systems and repay technical debt on their mobile platform
+Pni Digital Media, Vancouver, BC 11/2013 – 10/2014
+Senior Android Developer
+ Implemented Gradle and Automated test system
+ Architected and Redesigned rewrite of code to bring stability to the platform
+ Worked on the following brands
+o Costco Photo
+o Walmart Photo
+o Tesco Photo
+While at Pni, I used my experience to improve their platform and tools, and help implement
+new products on their platform
+Metal Rain Studios, Vancouver 6/2010 – present
+Founder
+Published Applications
+Metal Rain Studios - Independent Development
+https://play.google.com/store/apps/developer?id=Adam+Hammer
+Metal Rain is my independent game development company. I&#39;ve published several games
+and other visual applications for Android.
+o Published 25+ Apps and Games
+o Built an API driven CMS/White Label System
+Metal Rain is my independent company developing the software I feel like building
+Atimi Software, Vancouver 12/2010 – 10/2011
+Senior Android Developer
+ Engineer and Architect of the Atimi Mobile Sport Framework Atimi Sports Framework
+Apps.
+ In 8 months we developed Applications for the following sports teams:
+o Version 1.x: Canucks, Blackhawks, Flames
+o Version 2.0: Senators, Lions
+o Pending Release: Rangers, Canadiens
+ Lead a team of varying size up to 4 developers.
+ Optimized and improved company processes
+*/
 //const kJobs = ["Mindquake", "AFSI", "Mirabel", "Atimi", "Tio", "PNI/Staples", "Realtor.com"];
 final Map<String, Job> kJobExperienceWidgets = {
   "Realtor.com": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
       achievements: [
+        "Worked primarily on Realtor.com android",
         "Championed flutter migration",
         "Championed instant app implementation",
         "Designed analytics frameworks",
@@ -43,27 +86,61 @@ final Map<String, Job> kJobExperienceWidgets = {
         "Architecture"
       ],
       summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-  "PNI/Staples": Job(
-      company: "Realtor.com1",
-      title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
+          "Staff Engineer on the Mobile teams. Spearheaded many initiatives "
+          "(Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend "
+          "frameworks). Much of my time was spent building frameworks and "
+          "groundwork for projects and following them through to completion."),
+
+          
+  "Metal Rain": Job(
+      company: "Metal Rain Studios",
+      title: "Founder/Developer",
+      achievements: [
+        "Published Metal Rain - 3D Tank Game",
+        "Published White Collar Crime Simulator - Stock Simulator Game",
+        "Published 25+ additional small games and app",         
+        "Built MySaasa, a white labeling CMS system", 
+        ],
+      endDate: DateTime.now(),
+      startDate: DateTime.now(),
+      roles: <String>["a", "b", "c"],
+      skills: <String>["Android", "Java", "Kotlin", "Flutter", "OpenGL", "LibGDX", "Unreal Engine", "Wicket"],
+      summary:
+          "Indie gaming and project work. Various projects taken over the years."),
+
+
+
+  "PNI": Job(
+      company: "Pni",
+      title: "Senior Android Developer",
+      achievements: [
+"Implemented Gradle and Automated test system",
+"Architected and Redesigned rewrite of code to bring stability to the platform",
+"Worked on the following brands (Costco, Walmart, Tesco)",
+        ],
       endDate: DateTime.now(),
       startDate: DateTime.now(),
       roles: <String>["a", "b", "c"],
       skills: <String>["a", "b", "c"],
       summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
-  "Atimi": Job(
-      company: "Realtor.com2",
-      title: "Staff Engineer",
-      achievements: ["a", "b", "c"],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
-      roles: <String>["a", "b", "c"],
-      skills: <String>["a", "b", "c"],
-      summary:
-          "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
+          "While at Pni, I used my experience to improve their platform and tools, and help implement"
+          "new products on their platform"),
+
+
+/*
+Tio Networks, Vancouver, BC 11/2011 – 11/2013
+Senior Android Developer
+ Helped build and deliver the Android version of Tio&#39;s mobile pay framework. This software
+vertical allows bill-payment in a generic app, as well as client-branded bill payment
+applications
+ Tio Networks Bill payment platform:
+o PG&amp;E Mobile payments App
+o Mobilicity Payments App
+o El Paso Electric Payments App
+o Tio Mobile Pay
+Tio&#39;s applications are centered on bill payment for 3rd party power and mobile companies.
+We deploy several applications each quarter to various markets.
+*/
   "Mirabel": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
@@ -74,6 +151,8 @@ final Map<String, Job> kJobExperienceWidgets = {
       skills: <String>["a", "b", "c"],
       summary:
           "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
+
+
   "AFSI": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
@@ -84,6 +163,10 @@ final Map<String, Job> kJobExperienceWidgets = {
       skills: <String>["a", "b", "c"],
       summary:
           "Staff Engineer on the Mobile teams. Spearheaded many initiatives (Retrofit, RxJava, Flutter, Kotlin, Analytics, Frontend & Backend frameworks). Much of my time was spent building frameworks and groundwork for projects and following them through to completion."),
+
+
+
+
   "MindQuake": Job(
       company: "Realtor.com",
       title: "Staff Engineer",
