@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AppState extends ChangeNotifier {
-  String _theme = "Light";
+  String _theme = "Dark";
   void setTheme(String theme) {
     _theme = theme;
     notifyListeners();

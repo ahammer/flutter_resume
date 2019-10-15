@@ -41,7 +41,7 @@ final Map<String, Job> kJobExperienceWidgets = {
         "RxJava",
         "RetroFit",
         "Analytics",
-        "Architecture"
+        "Architecture",
         "Jenkins",
         "Jira"
       ],
