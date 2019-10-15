@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_flutter/screens/about/about_coming_soon.dart';
 import 'package:resume_flutter/widgets/secondary_screen.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class AboutScreen extends StatelessWidget {
       SecondaryScreen(title: "About", body: AboutScreenBody());
 }
 
-const kHobbies = ["3D Printing", "Photography", "Robotics", "Gaming"];
+const kHobbies = ["Coming Soon"];
 
 class AboutScreenBody extends StatefulWidget {
   const AboutScreenBody({
@@ -19,7 +20,7 @@ class AboutScreenBody extends StatefulWidget {
 }
 
 class _AboutScreenBodyState extends State<AboutScreenBody> {
-  String selected = "3D Printing";
+  String selected = "Coming Soon";
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +34,8 @@ class _AboutScreenBodyState extends State<AboutScreenBody> {
         Expanded(
           child: Stack(children: <Widget>[
             ContentPanel(
-                opened: selected == "3D Printing",
-                openOffset: 0,
-                closedOffset: -width,
-                width: width),
-            ContentPanel(
-                opened: selected == "Photography",
-                openOffset: 0,
-                closedOffset: -width,
-                width: width),
-            ContentPanel(
-                opened: selected == "Robotics",
-                openOffset: 0,
-                closedOffset: -width,
-                width: width),
-            ContentPanel(
-                opened: selected == "Gaming",
+              child: ComingSoon(),
+                opened: selected == "Coming Soon",
                 openOffset: 0,
                 closedOffset: -width,
                 width: width),
@@ -66,14 +53,17 @@ class _AboutScreenBodyState extends State<AboutScreenBody> {
 }
 
 class ContentPanel extends StatelessWidget {
+
   const ContentPanel({
     Key key,
     @required this.opened,
     @required this.openOffset,
     @required this.closedOffset,
     @required this.width,
+    @required this.child,
   }) : super(key: key);
 
+  final Widget child;
   final bool opened;
   final double openOffset;
   final double closedOffset;
@@ -96,6 +86,7 @@ class ContentPanel extends StatelessWidget {
                 
               ),
               curve: Curves.linearToEaseOut,
+              child: child,
               transform: Transform.translate(
                       offset: Offset(opened ? openOffset : closedOffset, 0))
                   .transform,

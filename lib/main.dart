@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resume_flutter/app_state.dart';
 import 'package:resume_flutter/screens/about/about_screen.dart';
-import 'package:resume_flutter/screens/about/resume_screen.dart';
+import 'package:resume_flutter/screens/resume/resume_screen.dart';
 import 'package:resume_flutter/theme.dart';
 import 'package:resume_flutter/transitions/fade_route.dart';
 import 'package:provider/provider.dart';

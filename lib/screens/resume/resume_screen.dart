@@ -8,49 +8,6 @@ class ResumeScreen extends StatelessWidget {
       SecondaryScreen(title: "About", body: ResumeScreenBody());
 }
 
-/*
-Top Producer Systems, Vancouver, BC 5/2015 – Present
-Senior Android Developer
- Worked with the Realtor.com mobile app
- Audited systems health and quality
- Decoupled components, provided architectural advice
- Migrated code from old to new systems
- Advised and trained staff, as well as helped with hiring process
- Devised long term plan to improve code quality
-At Top Producer I was brought on to consult as a Android subject expert, to audit and
-improve the systems and repay technical debt on their mobile platform
-Pni Digital Media, Vancouver, BC 11/2013 – 10/2014
-Senior Android Developer
- Implemented Gradle and Automated test system
- Architected and Redesigned rewrite of code to bring stability to the platform
- Worked on the following brands
-o Costco Photo
-o Walmart Photo
-o Tesco Photo
-While at Pni, I used my experience to improve their platform and tools, and help implement
-new products on their platform
-Metal Rain Studios, Vancouver 6/2010 – present
-Founder
-Published Applications
-Metal Rain Studios - Independent Development
-https://play.google.com/store/apps/developer?id=Adam+Hammer
-Metal Rain is my independent game development company. I&#39;ve published several games
-and other visual applications for Android.
-o Published 25+ Apps and Games
-o Built an API driven CMS/White Label System
-Metal Rain is my independent company developing the software I feel like building
-Atimi Software, Vancouver 12/2010 – 10/2011
-Senior Android Developer
- Engineer and Architect of the Atimi Mobile Sport Framework Atimi Sports Framework
-Apps.
- In 8 months we developed Applications for the following sports teams:
-o Version 1.x: Canucks, Blackhawks, Flames
-o Version 2.0: Senators, Lions
-o Pending Release: Rangers, Canadiens
- Lead a team of varying size up to 4 developers.
- Optimized and improved company processes
-*/
-//const kJobs = ["Mindquake", "AFSI", "Mirabel", "Atimi", "Tio", "PNI/Staples", "Realtor.com"];
 final Map<String, Job> kJobExperienceWidgets = {
   "Realtor.com": Job(
       company: "Realtor.com",
@@ -207,7 +164,7 @@ class _ResumeScreenBodyState extends State<ResumeScreenBody> {
               job: job,
             ),
             AchiementsWidget(job: job),
-            Container(height:72),
+            Container(height:24),
           ]),
         )
       ];
@@ -274,16 +231,11 @@ class JobSkillsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(2),
       child: Container(
           width: 120,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
-              color: Theme.of(context).colorScheme.surface,
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 3, offset: Offset(2, 2), color: Colors.black38)
-              ],
+          decoration: BoxDecoration(                            
+              
               borderRadius: BorderRadius.circular(4)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -392,7 +344,7 @@ class JobDetailHeader extends StatelessWidget {
                         alignment: FractionalOffset.bottomLeft,
                         child: Text(job.company,
                             style: Theme.of(context).textTheme.title.copyWith(
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontFamily: kDefaultFont,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context)
@@ -402,7 +354,7 @@ class JobDetailHeader extends StatelessWidget {
                 Expanded(
                     flex: 10,
                     child: Container(
-                        height: 22,
+                        height: 18,
                         alignment: FractionalOffset.bottomCenter,
                         child: Text(job.startDate.toString(),
                             style: Theme.of(context).textTheme.title.copyWith(
@@ -410,7 +362,7 @@ class JobDetailHeader extends StatelessWidget {
                 Expanded(
                     flex: 10,
                     child: Container(
-                        height: 22,
+                        height: 18,
                         alignment: FractionalOffset.bottomRight,
                         child: Text(job.title,
                             style: Theme.of(context).textTheme.title.copyWith(
