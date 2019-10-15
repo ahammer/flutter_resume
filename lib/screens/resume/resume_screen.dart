@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:resume_flutter/theme.dart';
 import 'package:resume_flutter/widgets/secondary_screen.dart';
 
@@ -7,7 +8,7 @@ class ResumeScreen extends StatelessWidget {
   Widget build(BuildContext context) =>
       SecondaryScreen(title: "About", body: ResumeScreenBody());
 }
-
+final formatter = DateFormat('MM/yyyy');
 final Map<String, Job> kJobExperienceWidgets = {
   "Realtor.com": Job(
       company: "Realtor.com",
@@ -31,7 +32,7 @@ final Map<String, Job> kJobExperienceWidgets = {
       ],
       roles: [],
       endDate: DateTime.now(),
-      startDate: DateTime.now(),
+      startDate: DateTime.utc(2015, DateTime.may),
       skills: <String>[
         "Android",
         "Flutter",
@@ -61,7 +62,7 @@ final Map<String, Job> kJobExperienceWidgets = {
         "Built MySaasa, a white labeling CMS system", 
         ],
       endDate: DateTime.now(),
-      startDate: DateTime.now(),
+      startDate: DateTime.utc(2010, DateTime.june),
       roles: <String>["a", "b", "c"],
       skills: <String>["Android", "Java", "Kotlin", "Flutter", "OpenGL", "LibGDX", "Unreal Engine", "Wicket", "Jira"],
       summary:
@@ -77,8 +78,8 @@ final Map<String, Job> kJobExperienceWidgets = {
 "Architected and Redesigned rewrite of code to bring stability to the platform",
 "Worked on the following brands (Costco, Walmart, Tesco)",
         ],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
+      endDate: DateTime.utc(2014, DateTime.october),
+      startDate: DateTime.utc(2013, DateTime.december),
       roles: <String>["a", "b", "c"],
       skills: <String>["Java", "Android", "Jira"],
       summary:
@@ -91,8 +92,8 @@ final Map<String, Job> kJobExperienceWidgets = {
       company: "Tio Networks",
       title: "Senior Mobile Engineer",
       achievements: ["Developed TioMobilePay (android)", "Deployed (PG&E, Mobilicity, El Paso Electric, TioMobilePay) branded versions.", "Branded C# Payment Kiosk"],
-      endDate: DateTime.now(),
-      startDate: DateTime.now(),
+      endDate: DateTime.utc(2013, DateTime.december),
+      startDate: DateTime.utc(2011, DateTime.december),      
       roles: <String>["a", "b", "c"],
       skills: <String>["Android", "Java", ".NET", "Jira"],
       summary:
@@ -356,7 +357,7 @@ class JobDetailHeader extends StatelessWidget {
                     child: Container(
                         height: 18,
                         alignment: FractionalOffset.bottomCenter,
-                        child: Text(job.startDate.toString(),
+                        child: Text(formatter.format(job.startDate) + " to " + formatter.format(job.endDate),
                             style: Theme.of(context).textTheme.title.copyWith(
                                 fontSize: 12, fontFamily: kDefaultFont)))),
                 Expanded(
